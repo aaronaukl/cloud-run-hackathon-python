@@ -23,7 +23,8 @@ logging.basicConfig(level=os.environ.get("LOGLEVEL", "INFO"))
 logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
-moves = ['T','L','R','F']
+moves = ['L','R','F']
+moves2 = ['T','L','R']
 
 @app.route("/", methods=['GET'])
 def index():
@@ -35,9 +36,9 @@ def move():
     logger.info(request.json)
     dictData = json.load(request.json)
     if(dictData["arena"]["state"]["wasHit"]==TRUE
-        return moves['F']
+        return moves[random.randrange(len(moves))]
     else
-       return moves['T']
+       return moves2[random.randrange(len(moves))]
 
 if __name__ == "__main__":
   app.run(debug=False,host='0.0.0.0',port=int(os.environ.get('PORT', 8080)))
