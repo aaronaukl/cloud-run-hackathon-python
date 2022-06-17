@@ -16,13 +16,14 @@
 import os
 import logging
 import random
+import json
 from flask import Flask, request
 
 logging.basicConfig(level=os.environ.get("LOGLEVEL", "INFO"))
 logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
-moves = ['T','L','R']
+moves = ['T','L','R','F']
 
 @app.route("/", methods=['GET'])
 def index():
@@ -32,7 +33,11 @@ def index():
 def move():
     request.get_data()
     logger.info(request.json)
-    return moves[random.randrange(len(moves))]
+    dictData = json.load(request.json)
+    if(dictData["arena"]["state"]["wasHit"]==TRUE
+        return moves['F']
+    else
+       return moves['T']
 
 if __name__ == "__main__":
   app.run(debug=False,host='0.0.0.0',port=int(os.environ.get('PORT', 8080)))
