@@ -36,7 +36,7 @@ def move():
     logger.info(request.json)
     dictData = json.load(request.json)
     if(dictData["arena"]["state"]["wasHit"]==TRUE
-        return moves[random.randrange(len(moves))]
+        return moves['F']
     else
        return moves2[random.randrange(len(moves))]
 
